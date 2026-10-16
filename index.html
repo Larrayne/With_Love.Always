@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thoughtful candle gifts for birthdays, anniversaries and everyday moments.">
+  <title>With Love, Always | Candle & Gift Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="images.css"><script src="script.js" defer></script>
+</head>
+<body>
+  <div class="announcement">Little gifts. Lasting feelings. ♡</div>
+  <header class="site-header">
+    <a class="brand" href="#home"><img class="brand-logo" src="images/logo.png" alt=""><span>With Love, Always<small>CANDLE & GIFT STUDIO</small></span></a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <nav id="mainNav" class="main-nav"><a href="#shop">Shop candles</a><a href="#story">Our story</a><a href="#personalise">Personalise a gift</a><a class="nav-cta" href="#order">Order a gift ↗</a></nav>
+  </header>
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-copy"><p class="eyebrow">MADE FOR YOUR FAVOURITE PEOPLE</p><h1>A little light.<br><em>A lot of love.</em></h1><p class="intro">Thoughtful candle gifts for birthdays, anniversaries, thank-yous and all the little moments worth celebrating.</p><div class="hero-actions"><a class="button button-dark" href="#shop">Explore the collection <span>→</span></a><a class="text-link" href="#personalise">Create a personal gift</a></div><p class="hero-note">✦ Thoughtfully chosen. Beautifully given.</p></div>
+      <div class="hero-art"><img class="hero-art-photo" src="images/candles.jpeg" alt="Four colorful candles arranged in a gift box"></div>
+    </section>
+    <section class="trust-strip"><span>♡ Made for meaningful moments</span><span>✦ Pretty gift-ready details</span><span>♡ Personal touches welcome</span></section>
+    <section class="section" id="shop"><div class="section-heading"><div><p class="eyebrow">THE GIFT EDIT</p><h2>Find their kind of glow.</h2></div><p>Small gestures, lovely scents and gifts picked with someone special in mind.</p></div><div class="product-grid" id="productGrid"></div><p class="price-note">Prices are starter examples for this website prototype. Confirm product costs and final prices before taking orders.</p></section>
+    <section class="love-banner" id="story"><div class="banner-symbol">♡</div><div><p class="eyebrow">A LITTLE ABOUT US</p><h2>It's never “just a candle”.</h2><p>It's a way to say “I'm thinking of you”, “you deserve a moment”, or “I'm so glad you're here”. We're building a small gift brand around those everyday feelings.</p></div></section>
+    <section class="section personal-section" id="personalise"><div class="personal-copy"><p class="eyebrow">MAKE IT THEIRS</p><h2>Your gift.<br><em>Your words.</em></h2><p>Add an occasion and a personal note. We'll include the details in your WhatsApp enquiry so we can confirm what's possible before payment.</p><ul><li>Birthday surprises</li><li>Anniversary & romance</li><li>Thank-you gifts</li><li>Just-because moments</li></ul></div>
+      <form id="giftForm" class="gift-form"><label for="occasion">What's the occasion?</label><select id="occasion"><option>Birthday</option><option>Anniversary</option><option>Thank you</option><option>Just because</option><option>Self-care</option><option>Other</option></select><label for="recipient">Who is it for? (optional)</label><input id="recipient" placeholder="e.g. My best friend"><label for="giftMessage">Your gift message</label><textarea id="giftMessage" rows="3" maxlength="180" placeholder="Write a little note..."></textarea><label for="wrapChoice">Gift wrap preference</label><select id="wrapChoice"><option>Gift-ready packaging (confirm availability)</option><option>Simple packaging</option><option>I'd like to discuss options</option></select><button class="button button-dark full-width" type="submit">Save gift details <span>→</span></button><p class="form-help">No payment is taken here. We'll confirm availability, delivery and final pricing with you.</p></form>
+    </section>
+    <section class="order-section" id="order"><p class="eyebrow">READY TO MAKE SOMEONE SMILE?</p><h2>Let's put a little love together.</h2><p>Choose a candle, add your gift details and send your request on WhatsApp.</p><button id="whatsappButton" class="button button-light">Start a WhatsApp order ↗</button><p class="order-help">WhatsApp ordering is in demo mode until you add your business number in <code>script.js</code>.</p></section>
+  </main>
+  <footer class="site-footer"><a class="brand footer-brand" href="#home"><img class="brand-logo" src="images/logo.png" alt=""><span>With Love, Always<small>CANDLE & GIFT STUDIO</small></span></a><p>Little gifts. Lasting feelings.</p><p class="copyright">© <span id="year"></span> With Love, Always. A small business in the making.</p></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body></html>
