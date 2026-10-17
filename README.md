@@ -14,3 +14,8 @@ A beginner-friendly static website starter built with HTML, CSS and JavaScript.
 - Check the brand name and domain availability before investing in packaging or advertising.
 
 This is a front-end prototype. It does not take payment, process orders on a server or store customer information persistently.
+
+## Checks and deployment
+- Run `node --test` to check JavaScript syntax, local asset paths and page anchors.
+- GitHub Actions runs these checks on pushes to `main` and deploys the site to GitHub Pages when they pass.
+- Before the first deployment, open the repository's **Settings > Pages** and set the build and deployment source to **GitHub Actions**.
