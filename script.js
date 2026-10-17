@@ -2,13 +2,13 @@
 const FORMSPREE_FORM_ID = "myekoypj";
 
 const products = [
-  { id: "soft-blush", name: "Soft Blush", price: 90, description: "A gentle, romantic candle for quiet evenings.", image: "images/pink.jpeg", imageAlt: "Pink candle in a glass jar with flowers" },
-  { id: "golden-hour", name: "Golden Hour", price: 90, description: "A warm glow for a little everyday luxury.", image: "images/teal.jpeg", imageAlt: "Teal candle in a glass jar" },
-  { id: "petal-kiss", name: "Petal Kiss", price: 90, description: "A floral-inspired gift for someone dear.", image: "images/purple.jpeg", imageAlt: "Purple candle in a glass jar with roses" },
-  { id: "love-note", name: "Love Note Gift", price: 100, description: "A candle made extra special with a message.", image: "images/packages.jpeg", imageAlt: "Gift box with four candles in colored glass jars" },
-  { id: "lavender-rose-duo", name: "Lavender & Rose Duo", price: 90, description: "A floral candle pairing styled with lavender and rose.", image: "images/image7.jpeg", imageAlt: "Two jar candles styled with dried flowers and lavender" },
-  { id: "for-you-gift", name: "For You Gift Candle", price: 90, description: "A candle presented in a keepsake-ready gift box.", image: "images/image8.jpeg", imageAlt: "Single candle displayed in an open gift box" },
-  { id: "garden-glow-pair", name: "Garden Glow Pair", price: 100, description: "Two decorative candles in warm amber and clear glass.", image: "images/image9.jpeg", imageAlt: "Two decorative flower-shaped candles in amber and clear glass" }
+  { id: "soft-blush", name: "Soft Blush", price: 90, priceLabel: "Each", description: "A gentle, romantic candle for quiet evenings.", image: "images/pink.jpeg", imageAlt: "Pink candle in a glass jar with flowers" },
+  { id: "golden-hour", name: "Golden Hour", price: 90, priceLabel: "Each", description: "A warm glow for a little everyday luxury.", image: "images/teal.jpeg", imageAlt: "Teal candle in a glass jar" },
+  { id: "petal-kiss", name: "Petal Kiss", price: 90, priceLabel: "Each", description: "A floral-inspired gift for someone dear.", image: "images/purple.jpeg", imageAlt: "Purple candle in a glass jar with roses" },
+  { id: "love-note", name: "Love Note Gift", price: 100, priceLabel: "Each", description: "A candle made extra special with a message.", image: "images/packages.jpeg", imageAlt: "Gift box with four candles in colored glass jars" },
+  { id: "lavender-rose-duo", name: "Lavender & Rose Duo", price: 90, priceLabel: "Each", description: "A floral candle pairing styled with lavender and rose.", image: "images/image7.jpeg", imageAlt: "Two jar candles styled with dried flowers and lavender" },
+  { id: "for-you-gift", name: "For You Gift Candle", price: 90, priceLabel: "Each", description: "A candle presented in a keepsake-ready gift box.", image: "images/image8.jpeg", imageAlt: "Single candle displayed in an open gift box" },
+  { id: "garden-glow-pair", name: "Garden Glow Pair", price: 100, priceLabel: "Each", description: "Two decorative candles in warm amber and clear glass.", image: "images/image9.jpeg", imageAlt: "Two decorative flower-shaped candles in amber and clear glass" }
 ];
 let selectedProduct = products[0];
 const productGrid = document.querySelector("#productGrid");
@@ -25,8 +25,8 @@ function showToast(message) {
 
 function renderProducts() {
   productGrid.innerHTML = products.map((product, index) => `
-    <article class="product-card"><div class="product-art has-photo"><img class="product-photo" src="${product.image}" alt="${product.imageAlt}" loading="lazy"></div>
-      <div class="product-info"><div class="product-title-row"><h3>${product.name}</h3><span class="price">R${product.price.toFixed(2)}</span></div><p>${product.description}</p>
+    <article class="product-card"><div class="product-art has-photo"><img class="product-photo" src="${product.image}" alt="${product.imageAlt}" loading="lazy"><span class="product-photo-price">R${product.price.toFixed(0)} ${product.priceLabel}</span></div>
+      <div class="product-info"><div class="product-title-row"><h3>${product.name}</h3><span class="price">R${product.price.toFixed(2)} each</span></div><p>${product.description}</p>
       <button class="add-button ${index === 0 ? "selected" : ""}" data-product="${product.id}" type="button">${index === 0 ? "✓ Selected for your order" : "Choose this candle"}</button></div></article>`).join("");
   productGrid.querySelectorAll("[data-product]").forEach(button => button.addEventListener("click", () => {
     selectedProduct = products.find(product => product.id === button.dataset.product);

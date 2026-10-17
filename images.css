@@ -15,6 +15,30 @@
   object-position: center 60%;
 }
 
+.product-photo-price,
+.hero-price-note {
+  position: absolute;
+  z-index: 1;
+  padding: .4rem .6rem;
+  border: 1px solid #b58a50;
+  border-radius: 2px;
+  background: rgba(255, 250, 243, .96);
+  color: #35262b;
+  font-size: .75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.product-photo-price {
+  left: .65rem;
+  bottom: .65rem;
+}
+
+.hero-price-note {
+  left: .75rem;
+  bottom: .75rem;
+}
+
 .brand-logo {
   display: block;
   width: 3.25rem;
