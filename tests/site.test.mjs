@@ -46,3 +46,12 @@ test("in-page links point to existing elements", () => {
     assert.ok(elementIds.has(target), `No element found for #${target}`);
   }
 });
+
+test("private email enquiry form replaces direct WhatsApp contact", () => {
+  const script = readFileSync(path.join(rootDirectory, "script.js"), "utf8");
+
+  assert.match(html, /id="orderForm"/);
+  assert.match(html, /id="customerEmail"/);
+  assert.match(script, /https:\/\/formspree\.io\/f\/\$\{FORMSPREE_FORM_ID\}/);
+  assert.doesNotMatch(script, /wa\.me|WHATSAPP_NUMBER/);
+});

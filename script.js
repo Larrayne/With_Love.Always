@@ -1,17 +1,17 @@
-// With Love, Always — beginner-friendly product catalogue and WhatsApp order builder.
-// Before launch: replace this placeholder with your business WhatsApp number.
-// Use international format with digits only: South Africa starts with 27; omit the leading 0.
-const WHATSAPP_NUMBER = "27XXXXXXXXX";
+// Add the public form ID from your Formspree dashboard before accepting enquiries.
+const FORMSPREE_FORM_ID = "YOUR_FORMSPREE_FORM_ID";
 
 const products = [
-  { id: "soft-blush", name: "Soft Blush", price: 89, description: "A gentle, romantic candle for quiet evenings.", image: "images/pink.jpeg", imageAlt: "Pink candle in a glass jar with flowers" },
-  { id: "golden-hour", name: "Golden Hour", price: 99, description: "A warm glow for a little everyday luxury.", image: "images/teal.jpeg", imageAlt: "Teal candle in a glass jar" },
-  { id: "petal-kiss", name: "Petal Kiss", price: 109, description: "A floral-inspired gift for someone dear.", image: "images/purple.jpeg", imageAlt: "Purple candle in a glass jar with roses" },
-  { id: "love-note", name: "Love Note Gift", price: 129, description: "A candle made extra special with a message.", image: "images/packages.jpeg", imageAlt: "Gift box with four candles in colored glass jars" }
+  { id: "soft-blush", name: "Soft Blush", price: 90, description: "A gentle, romantic candle for quiet evenings.", image: "images/pink.jpeg", imageAlt: "Pink candle in a glass jar with flowers" },
+  { id: "golden-hour", name: "Golden Hour", price: 90, description: "A warm glow for a little everyday luxury.", image: "images/teal.jpeg", imageAlt: "Teal candle in a glass jar" },
+  { id: "petal-kiss", name: "Petal Kiss", price: 90, description: "A floral-inspired gift for someone dear.", image: "images/purple.jpeg", imageAlt: "Purple candle in a glass jar with roses" },
+  { id: "love-note", name: "Love Note Gift", price: 100, description: "A candle made extra special with a message.", image: "images/packages.jpeg", imageAlt: "Gift box with four candles in colored glass jars" }
 ];
 let selectedProduct = products[0];
 const productGrid = document.querySelector("#productGrid");
 const toast = document.querySelector("#toast");
+const orderForm = document.querySelector("#orderForm");
+const orderStatus = document.querySelector("#orderStatus");
 let giftDetails = { occasion: "Birthday", recipient: "", message: "", wrap: "Gift-ready packaging (confirm availability)" };
 
 function showToast(message) {
@@ -44,30 +44,47 @@ function readGiftForm() {
     wrap: document.querySelector("#wrapChoice").value
   };
 }
-function buildOrderMessage() {
-  readGiftForm();
-  return [
-    "Hello! I'd like to enquire about a candle gift from With Love, Always.", "",
-    `Candle: ${selectedProduct.name} (listed prototype price R${selectedProduct.price.toFixed(2)})`,
-    `Occasion: ${giftDetails.occasion}`, `Gift recipient: ${giftDetails.recipient || "Not specified"}`,
-    `Gift message: ${giftDetails.message || "No message added yet"}`, `Packaging: ${giftDetails.wrap}`, "",
-    "Please confirm availability, final price and delivery/pick-up options before I pay. Thank you!"
-  ].join("\n");
-}
-function openWhatsApp() {
-  if (WHATSAPP_NUMBER.includes("X")) {
-    showToast("Demo mode: add your business WhatsApp number in script.js before ordering.");
-    return;
-  }
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(buildOrderMessage())}`, "_blank", "noopener,noreferrer");
-}
-
 document.querySelector("#giftForm").addEventListener("submit", event => {
   event.preventDefault(); readGiftForm();
-  showToast("Gift details saved for this visit. Choose a candle and start your WhatsApp order.");
+  showToast("Gift details saved for this visit. Choose a candle and send your email enquiry.");
   document.querySelector("#order").scrollIntoView({ behavior: "smooth" });
 });
-document.querySelector("#whatsappButton").addEventListener("click", openWhatsApp);
+orderForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  if (FORMSPREE_FORM_ID === "YOUR_FORMSPREE_FORM_ID") {
+    orderStatus.textContent = "Email requests aren't connected yet. Add your Formspree form ID in script.js to receive orders.";
+    return;
+  }
+
+  readGiftForm();
+  const submitButton = orderForm.querySelector("button[type='submit']");
+  const formData = new FormData(orderForm);
+  formData.append("_replyto", formData.get("email"));
+  formData.append("_subject", `Candle gift enquiry: ${selectedProduct.name}`);
+  formData.append("Candle", `${selectedProduct.name} (listed price R${selectedProduct.price.toFixed(2)})`);
+  formData.append("Occasion", giftDetails.occasion);
+  formData.append("Gift recipient", giftDetails.recipient || "Not specified");
+  formData.append("Gift message", giftDetails.message || "No message added");
+  formData.append("Packaging", giftDetails.wrap);
+  formData.append("message", "Please confirm availability, final price and delivery or pick-up options before payment.");
+
+  submitButton.disabled = true;
+  orderStatus.textContent = "Sending your enquiry...";
+  try {
+    const response = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
+      method: "POST",
+      body: formData,
+      headers: { Accept: "application/json" }
+    });
+    if (!response.ok) throw new Error("Form submission failed");
+    orderForm.reset();
+    orderStatus.textContent = "Your enquiry was sent. We'll reply to your email soon.";
+  } catch {
+    orderStatus.textContent = "We couldn't send your enquiry. Please try again in a moment.";
+  } finally {
+    submitButton.disabled = false;
+  }
+});
 const menuToggle = document.querySelector("#menuToggle");
 const mainNav = document.querySelector("#mainNav");
 menuToggle.addEventListener("click", () => {

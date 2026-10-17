@@ -8,12 +8,13 @@ A beginner-friendly static website starter built with HTML, CSS and JavaScript.
 3. Edit the content in `index.html`, the visual design in `styles.css`, and the catalogue/order behaviour in `script.js`.
 
 ## Before taking real orders
-- Replace `27XXXXXXXXX` in `script.js` with your WhatsApp business number in international format, digits only.
+- Create a form with Formspree and replace `YOUR_FORMSPREE_FORM_ID` in `script.js` with its form ID. Set your private reply-to/notification email in the Formspree dashboard; the email address is not stored in this repository.
+- The public form ID does not hide data submitted by visitors from Formspree. Add a privacy notice explaining how customer email addresses and gift details are handled.
 - The displayed product prices are examples, not validated prices. Calculate wax, fragrance, wick, vessel, labels, packaging and delivery costs first.
 - Add real product photographs, candle safety information, delivery/returns terms and a privacy notice.
 - Check the brand name and domain availability before investing in packaging or advertising.
 
-This is a front-end prototype. It does not take payment, process orders on a server or store customer information persistently.
+This is a front-end prototype and does not take payment. Once Formspree is configured, it receives and stores enquiry submissions according to your account settings.
 
 ## Checks and deployment
 - Run `node --test` to check JavaScript syntax, local asset paths and page anchors.
