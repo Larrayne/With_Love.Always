@@ -38,6 +38,15 @@ test("product photos exist", () => {
   }
 });
 
+test("every product photo displays its per-item price", () => {
+  const script = readFileSync(path.join(rootDirectory, "script.js"), "utf8");
+  const priceLabels = [...script.matchAll(/priceLabel:\s*"Each"/g)];
+
+  assert.equal(priceLabels.length, 7, "Expected every product to define an Each price label");
+  assert.match(script, /class="product-photo-price">R\$\{product\.price\.toFixed\(0\)\} \$\{product\.priceLabel\}/);
+  assert.match(html, /class="hero-price-note">Prices are per candle</);
+});
+
 test("in-page links point to existing elements", () => {
   const elementIds = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
   const fragmentTargets = [...html.matchAll(/href="#([^"]+)"/g)].map((match) => match[1]);
